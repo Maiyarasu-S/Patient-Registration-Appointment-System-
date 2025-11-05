@@ -23,3 +23,5 @@
     };
 
     window.validator = validator;
+
+    
