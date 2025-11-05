@@ -1,24 +1,28 @@
-/* =========================================================
-   Sterlo Hospital – UI Theme (Inter + Poppins)
-   Calm blue-teal palette, soft shadows, clean forms
-   ========================================================= */
 
-/* -------------------------------
-   Design Tokens
--------------------------------- */
 :root{
-  /* Palette */
+  /* Base neutrals */
   --bg: #f8fafc;               /* page background */
   --surface: #ffffff;           /* cards, modals */
   --border: #e2e8f0;            /* subtle dividers */
   --muted: #64748b;             /* secondary text */
-  --text: #1e293b;              /* primary text */
+  --text: #0f172a;              /* primary text (darker for contrast) */
 
-  --primary: #2563eb;           /* buttons, links */
-  --primary-600:#1d4ed8;
-  --primary-100:#e9f2ff;
+  /* Brand palette (lapis/teal set) */
+  --lapis: #05668d;             /* lapis-lazuli */
+  --teal: #028090;              /* teal */
+  --persian: #00a896;           /* persian-green */
+  --mint: #02c39a;              /* mint */
+  --cream: #f0f3bd;             /* warm light */
 
-  --accent: #14b8a6;            /* subtle accents */
+  /* Brand roles */
+  --primary: var(--lapis);      /* main CTAs */
+  --primary-600:#045676;        /* hover/darker */
+  --primary-100:#d8eef5;        /* pale lapis tint */
+
+  --accent: var(--persian);     /* secondary CTAs / highlights */
+  --accent-100:#d7f5ee;         /* pale persian tint */
+
+  /* Status */
   --success:#16a34a;
   --danger:#dc2626;
   --warning:#f59e0b;
@@ -32,15 +36,15 @@
   --content-max: 1280px;
 }
 
+/* Ensure Bootstrap .text-primary uses our token */
+.text-primary { color: var(--primary) !important; }
+
 /* -------------------------------
    Global
 -------------------------------- */
 * { box-sizing: border-box; }
 
-html, body {
-  height: 100%;
-  scroll-behavior: smooth;
-}
+html, body { height: 100%; scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
@@ -58,18 +62,11 @@ h1,h2,h3,h4,h5 {
 }
 
 /* Wrapper sets a readable width on large screens */
-.app-wrapper .main-content {
-  max-width: var(--content-max);
-}
+.app-wrapper .main-content { max-width: var(--content-max); }
 
 /* Subtle fade for page switches */
-.view-section {
-  opacity: 0;
-  transition: opacity .25s ease-in-out;
-}
-.view-section:not(.d-none) {
-  opacity: 1;
-}
+.view-section { opacity: 0; transition: opacity .25s ease-in-out; }
+.view-section:not(.d-none) { opacity: 1; }
 
 /* -------------------------------
    Sidebar
@@ -80,25 +77,40 @@ h1,h2,h3,h4,h5 {
   box-shadow: var(--shadow-sm);
 }
 
-.sidebar h4{
-  font-weight: 600;
-}
+.sidebar h4{ font-weight: 600; }
 
 .sidebar .nav .nav-link{
   color: #475569;
   border-radius: 10px;
   padding: .55rem .75rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
   transition: background .2s ease, color .2s ease;
 }
 
 .sidebar .nav .nav-link:hover{
-  background: #f1f5f9;
+  background: var(--accent-100); /* soft persian tint */
+}
+
+.sidebar .nav .nav-link i{
+  font-size: 1.1rem;
+  color: #334155; /* icon dark slate by default */
+  transition: color .2s ease;
+}
+
+.sidebar .nav .nav-link:hover i{
+  color: var(--primary);
 }
 
 .sidebar .nav .nav-link.active{
   background: var(--primary);
   color: #fff !important;
   font-weight: 600;
+}
+
+.sidebar .nav .nav-link.active i{
+  color: #fff; /* white when selected */
 }
 
 /* Fix full height on smaller screens */
@@ -110,7 +122,7 @@ h1,h2,h3,h4,h5 {
    Cards / Sections / Banners
 -------------------------------- */
 .form-banner{
-  background: linear-gradient(90deg, rgba(37,99,235,.08), rgba(20,184,166,.05));
+  background: linear-gradient(90deg, rgba(0,168,150,.10), rgba(2,195,154,.08)); /* persian → mint */
   border-left: 4px solid var(--primary);
   padding: 1rem 1.25rem;
   border-radius: 10px;
@@ -138,22 +150,10 @@ h1,h2,h3,h4,h5 {
 /* -------------------------------
    Forms – Two-column compact
 -------------------------------- */
-.form-card{
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-.form-card .card-body{
-  padding: 1.5rem;
-}
-
-.form-section{
-  max-width: 640px; /* keeps forms tidy */
-}
-
-.form-section .row{
-  align-items: center;
-}
+.form-card{ max-width: 820px; margin: 0 auto; }
+.form-card .card-body{ padding: 1.5rem; }
+.form-section{ max-width: 640px; }
+.form-section .row{ align-items: center; }
 
 .form-section .col-form-label{
   text-align: left;
@@ -177,7 +177,8 @@ h1,h2,h3,h4,h5 {
 
 .form-control:focus, .form-select:focus, textarea.form-control:focus{
   border-color: var(--primary);
-  box-shadow: 0 0 0 .15rem rgba(37,99,235,.18);
+  /* lapis focus ring */
+  box-shadow: 0 0 0 .15rem rgba(5,102,141,.18);
 }
 
 /* Compact field width inside forms */
@@ -206,9 +207,7 @@ h1,h2,h3,h4,h5 {
 /* -------------------------------
    Buttons
 -------------------------------- */
-.btn{
-  border-radius: 10px;
-}
+.btn{ border-radius: 10px; }
 
 .btn-primary{
   background: var(--primary);
@@ -216,33 +215,127 @@ h1,h2,h3,h4,h5 {
 }
 .btn-primary:hover{ background: var(--primary-600); border-color: var(--primary-600); }
 
-.btn-success{
-  background: var(--success);
-  border-color: var(--success);
-}
+.btn-success{ background: var(--success); border-color: var(--success); }
 
-/* Outline secondary button base + hover (single, non-duplicated rule) */
+/* Outline secondary button base + hover */
 .btn-outline-secondary {
   color: #475569;
   border-color: #cbd5e1;
   transition: all 0.2s ease-in-out;
 }
 .btn-outline-secondary:hover {
-  background-color: #dbeafe; /* subtle blue tint on hover */
-  color: #000;               /* black text on hover */
+  background-color: var(--primary-100); /* pale lapis tint */
+  color: #000;
   border-color: #cbd5e1;
 }
 
 /* Icon buttons in tables */
-.table .btn.btn-sm{
-  padding: .25rem .5rem;
+.table .btn.btn-sm{ padding: .25rem .5rem; }
+
+/* Action icon colors: black idle → white on hover */
+.table .btn i{
+  color: #334155;
+  transition: color .2s ease;
 }
+.table .btn:hover i{ color: #fff; }
+
+/* Action row: primary first, aligned right on desktop, stacked on mobile */
+.form-actions{
+  display:flex;
+  gap:.6rem;
+  justify-content:flex-end;
+  align-items:center;
+  margin-top: 1rem;
+}
+
+/* Big, comfy tap targets */
+.btn-lg{
+  padding: .75rem 1.25rem;
+  font-weight: 600;
+  line-height: 1.1;
+  border-radius: 12px;
+  min-height: 48px; /* WCAG-friendly */
+}
+
+/* Make primary pop a bit more */
+.action-primary{
+  box-shadow: 0 6px 14px rgba(5,102,141,.15);
+}
+.action-primary:focus-visible{
+  box-shadow: 0 0 0 .2rem rgba(5,102,141,.25);
+}
+
+/* Low-emphasis secondary button (“ghost”) */
+.btn-ghost{
+  background: transparent;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+.btn-ghost:hover{
+  background: var(--primary-100);
+  color: #0f172a;
+}
+
+/* Compact buttons only on the two forms */
+#patientForm .btn,
+#apptForm .btn {
+  height: 32px;               /* down from 38px */
+  padding: .25rem .6rem;      /* tighter padding */
+  font-size: .9rem;           /* slightly smaller text */
+  border-radius: 8px;         /* a bit crisper */
+  line-height: 1.2;           /* avoids tall text boxes */
+}
+
+/* Make primary actions still feel like CTAs */
+#patientForm .btn[type="submit"],
+#apptForm .btn[type="submit"] {
+  font-weight: 600;
+}
+
+/* If your buttons include icons, keep them proportional */
+#patientForm .btn i,
+#apptForm .btn i {
+  font-size: 1rem;
+  margin-right: .35rem;
+}
+
+/* (Optional) give the Reset a lighter look without changing color tokens */
+#patientForm .btn[type="reset"],
+#apptForm .btn[type="reset"] {
+  opacity: 0.9;
+}
+#patientForm .btn[type="reset"]:hover,
+#apptForm .btn[type="reset"]:hover {
+  opacity: 1;
+}
+
+#btnAddPatient {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+#btnAddPatient:hover {
+  background-color: var(--primary-600);
+  border-color: var(--primary-600);
+}
+
+/* Responsive: stack + full-width on small screens */
+@media (max-width: 575.98px){
+  .form-actions{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-actions .btn{
+    width: 100%;
+  }
+}
+
 
 /* -------------------------------
    Tables
 -------------------------------- */
 .table thead th{
-  background: #f1f5f9 !important;
+  background: linear-gradient(180deg, #f6fbfe, #eaf7f3); /* cool tint */
   color: #334155;
   font-weight: 600;
   border-bottom: 1px solid var(--border) !important;
@@ -251,13 +344,8 @@ h1,h2,h3,h4,h5 {
   z-index: 1;
 }
 
-.table tbody tr:hover{
-  background: #fbfdff;
-}
-
-.table td, .table th{
-  vertical-align: middle;
-}
+.table tbody tr:hover{ background: #fbfdff; }
+.table td, .table th{ vertical-align: middle; }
 
 /* Status badges */
 .badge{
@@ -277,14 +365,8 @@ h1,h2,h3,h4,h5 {
   border: 1px solid var(--border);
   box-shadow: var(--shadow-md);
 }
-
-.modal-header{
-  border-bottom: 1px solid var(--border);
-}
-
-.modal-footer{
-  border-top: 1px solid var(--border);
-}
+.modal-header{ border-bottom: 1px solid var(--border); }
+.modal-footer{ border-top: 1px solid var(--border); }
 
 /* -------------------------------
    Toasts
@@ -293,6 +375,7 @@ h1,h2,h3,h4,h5 {
   border-radius: 10px;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border);
+  backdrop-filter: saturate(120%) blur(6px);
 }
 
 /* -------------------------------
@@ -306,42 +389,40 @@ h1,h2,h3,h4,h5 {
    Custom dropdown arrow for select fields
 ----------------------------------------- */
 .form-select {
-  appearance: none;             /* Removes native arrow (cross-browser) */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   background-color: #fff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23475569' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.6rem 2.25rem 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  /* SVG Arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23475569' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.9rem center;
   background-size: 1rem;
-  padding-right: 2rem;          /* space for the arrow */
-  cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
 .form-select:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.18);
+  box-shadow: 0 0 0 0.15rem rgba(5, 102, 141, 0.18);
   outline: none;
 }
+.form-select option { color: var(--text); background-color: #fff; }
 
-.form-select option {
-  color: var(--text);
-  background-color: #fff;
-}
 /* =========================================================
    Dashboard Polish – Pro Aesthetic
-   (builds on your existing tokens + styles)
    ========================================================= */
-
-/* ---------- 1) Stat Cards (Home) ---------- */
 .stat-card{
   position: relative;
-  border: 1px solid color-mix(in oklab, var(--border) 85%, var(--primary) 15%);
+  border: 1px solid color-mix(in oklab, var(--border) 80%, var(--primary) 20%);
   border-radius: 14px;
   background:
-    radial-gradient(120% 120% at 100% -10%, color-mix(in oklab, var(--primary) 9%, #fff 91%), transparent 50%),
-    radial-gradient(120% 120% at -20% 120%, color-mix(in oklab, var(--accent) 7%, #fff 93%), transparent 60%),
+    radial-gradient(120% 120% at 100% -10%, rgba(5,102,141,.08), transparent 50%),
+    radial-gradient(120% 120% at -20% 120%, rgba(0,168,150,.07), transparent 60%),
     var(--surface);
   box-shadow: var(--shadow-sm);
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
@@ -349,9 +430,8 @@ h1,h2,h3,h4,h5 {
 .stat-card:hover{
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  border-color: color-mix(in oklab, var(--border) 70%, var(--primary) 30%);
+  border-color: color-mix(in oklab, var(--border) 65%, var(--primary) 35%);
 }
-
 .stat-card .stat-label{
   font-size: .85rem;
   color: color-mix(in oklab, var(--muted) 85%, var(--text) 15%);
@@ -362,8 +442,6 @@ h1,h2,h3,h4,h5 {
   color: var(--text);
   line-height: 1.1;
 }
-
-/* Optional: small accent pill in top-right */
 .stat-card::after{
   content: "";
   position: absolute;
@@ -373,18 +451,15 @@ h1,h2,h3,h4,h5 {
   background: var(--accent);
   opacity: .35;
 }
-
-/* Color accents per card (add these classes on the card if you like) */
 .stat--primary { border-color: color-mix(in oklab, var(--primary) 35%, var(--border) 65%); }
 .stat--success { border-color: color-mix(in oklab, var(--success) 35%, var(--border) 65%); }
 .stat--warning { border-color: color-mix(in oklab, var(--warning) 35%, var(--border) 65%); }
 
-/* Compact spacing on very small screens */
 @media (max-width: 575.98px){
   .stat-card .stat-value{ font-size: 1.35rem; }
 }
 
-/* ---------- 2) Home Action Bar (search + buttons) ---------- */
+/* ---------- Home Action Bar ---------- */
 #homePage .action-bar{
   display: flex;
   gap: .5rem;
@@ -401,103 +476,40 @@ h1,h2,h3,h4,h5 {
   border-radius: 10px;
 }
 
-/* Outline button refinement (export) */
+/* Export button */
 #homePage #btnExportCsv{
-  border-color: #cbd5e1;
+  border-color: #d4d8dc;
   color: #475569;
   background: #fff;
 }
 #homePage #btnExportCsv:hover{
-  background: #e2e8f0;
-  color: #0b1220; /* deep black-ish */
-  border-color: #cbd5e1;
+  background: var(--primary-100);
+  color: #0b1220;
+  border-color: #4d4f53;
 }
 
-/* ---------- 3) Table polish ---------- */
-.table-card{
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: clip; /* no awkward shadows overflow */
-}
-.table thead th{
-  background: linear-gradient(180deg, #f6f8fc, #eef2f7);
-  font-size: .92rem;
-  letter-spacing: .2px;
-}
-.table tbody tr{
-  transition: background-color .12s ease, box-shadow .12s ease;
-}
-.table tbody tr:hover{
-  background: #fbfdff;
-}
-.table tbody td{
-  border-top-color: #eef2f7 !important;
-}
-
-/* Action buttons inside table rows */
-.table .btn.btn-sm{
-  padding: .3rem .55rem;
-  border-radius: 8px;
-}
+/* ---------- Tables polish ---------- */
+.table-card{ border: 1px solid var(--border); border-radius: 14px; overflow: clip; }
+.table tbody tr{ transition: background-color .12s ease, box-shadow .12s ease; }
+.table tbody tr:hover{ background: #fbfdff; }
+.table tbody td{ border-top-color: #eef2f7 !important; }
+.table .btn.btn-sm{ padding: .3rem .55rem; border-radius: 8px; }
 .table .btn[data-action="edit"]{ border-color: color-mix(in oklab, var(--primary) 55%, #cbd5e1 45%); }
 .table .btn[data-action="delete"]{ border-color: color-mix(in oklab, var(--danger) 55%, #cbd5e1 45%); }
 
-/* ---------- 4) Forms: label/field rhythm ---------- */
-.form-card{
-  border-radius: 14px;
-}
-.form-card .card-body{
-  padding: 1.75rem;
-}
-.form-section .row{
-  margin-bottom: .85rem;
-}
-.form-section .col-form-label{
-  color: #334155;
-  font-weight: 600;
-}
-.form-control, .form-select, textarea.form-control{
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-  transition: border-color .15s ease, box-shadow .15s ease;
-}
-.form-control:focus, .form-select:focus, textarea.form-control:focus{
-  border-color: var(--primary);
-  box-shadow: 0 0 0 .14rem rgba(37,99,235,.18);
-}
+/* ---------- Micro-interactions ---------- */
+.btn-primary{ box-shadow: 0 1px 0 rgba(0,0,0,.03); }
+.btn-primary:hover{ box-shadow: 0 4px 10px rgba(5,102,141,.16); }
+.btn-success:hover{ box-shadow: 0 4px 10px rgba(22,163,74,.16); }
 
-/* Clearer custom arrow for selects (already present, just tuned) */
-.form-select{
-  background-position: right .9rem center;
-  background-size: 1rem;
-  padding-right: 2rem;
-}
-
-/* ---------- 5) Micro-interactions ---------- */
-.btn-primary{
-  box-shadow: 0 1px 0 rgba(0,0,0,.03);
-}
-.btn-primary:hover{
-  box-shadow: 0 4px 10px rgba(37,99,235,.16);
-}
-.btn-success:hover{
-  box-shadow: 0 4px 10px rgba(22,163,74,.16);
-}
-
-/* Focus outlines for keyboard users */
+/* Keyboard focus */
 :focus-visible{
   outline: 2px solid color-mix(in oklab, var(--primary) 65%, #fff 35%);
   outline-offset: 2px;
   border-radius: 10px;
 }
 
-/* ---------- 6) Toast tone ---------- */
-.toast{
-  backdrop-filter: saturate(120%) blur(6px);
-}
-
-/* ---------- 7) Optional: subtle page title treatment ---------- */
+/* ---------- Page title treatment ---------- */
 .page-title{
   display: flex;
   align-items: center;
@@ -512,56 +524,16 @@ h1,h2,h3,h4,h5 {
 }
 
 /* Inline form fields grouping */
-.form-section .row.g-2 .form-control {
-  min-width: 0;
-}
+.form-section .row.g-2 .form-control { min-width: 0; }
 
-/* Make grouped fields stack on small screens */
+/* Stack grouped fields on small screens */
 @media (max-width: 767.98px) {
   .form-section .row.g-2 .col-md-6,
   .form-section .row.g-2 .col-md-4 {
     flex: 0 0 100%;
     max-width: 100%;
   }
-
-  .form-section label {
-    margin-bottom: .35rem;
-  }
-}
-
-/* =========================================================
-   Uniform Dropdown Styling – Custom Down Arrow
-   ========================================================= */
-.form-select {
-  appearance: none; /* remove native arrow (cross-browser) */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  background-color: #fff;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  padding: 0.6rem 2.25rem 0.6rem 0.75rem; /* leave room for arrow */
-  font-size: 0.95rem;
-  color: var(--text);
-  cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
-  /* 🔽 SVG Arrow (inline, dark gray) */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23475569' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.9rem center;
-  background-size: 1rem;
-}
-
-.form-select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.18);
-  outline: none;
-}
-
-.form-select option {
-  color: var(--text);
-  background-color: #fff;
+  .form-section label { margin-bottom: .35rem; }
 }
 
 /* ===== Sticky Sidebar (Desktop) ===== */
@@ -570,22 +542,20 @@ h1,h2,h3,h4,h5 {
   top: 0;
   left: 0;
   height: 100vh;
-  width: 240px; /* matches col-lg-2 width roughly */
-  background-color: #f8f9fa; /* same as bg-light */
+  width: 240px; /* ~col-lg-2 */
+  background-color: #f8f9fa;
   border-right: 1px solid #e5e5e5;
   padding: 1rem;
-  overflow-y: auto; /* scrollable if needed */
-  z-index: 1020; /* above main content */
+  overflow-y: auto;
+  z-index: 1020;
 }
 
 /* Adjust main content to make room for sidebar */
 @media (min-width: 992px) {
-  .main-content {
-    margin-left: 240px;
-  }
+  .main-content { margin-left: 240px; }
 }
 
-/* On smaller screens, disable fixed sidebar (use your mobile menu) */
+/* On smaller screens, disable fixed sidebar (use mobile menu) */
 @media (max-width: 991.98px) {
   .sidebar {
     position: static;
@@ -595,7 +565,6 @@ h1,h2,h3,h4,h5 {
   }
 }
 
-
 /* -------------------------------
    Responsive tweaks
 -------------------------------- */
@@ -604,14 +573,13 @@ h1,h2,h3,h4,h5 {
   .form-banner{ padding: .85rem 1rem; }
   #searchBox, #patientSearch{ max-width: 100%; }
 }
+
 /* =========================================================
    Mobile Hamburger Navbar (≤ 991.98px)
    ========================================================= */
 @media (max-width: 991.98px) {
   /* Push content below fixed topbar */
-  .main-content {
-    margin-top: 4.25rem; /* matches topbar height */
-  }
+  .main-content { margin-top: 4.25rem; }
 
   /* Topbar aesthetics */
   .mobile-topbar {
@@ -637,13 +605,22 @@ h1,h2,h3,h4,h5 {
     color: #475569;
     padding: .55rem .75rem;
     margin: .15rem 0;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
   }
-  #mobileNav .nav-link:hover {
-    background: #f1f5f9;
-  }
+  #mobileNav .nav-link:hover { background: var(--accent-100); }
   #mobileNav .nav-link.active {
     background: var(--primary-100);
     color: var(--primary);
     font-weight: 600;
+  }
+
+  #mobileNav .nav-link i{
+    font-size: 1.1rem;
+    color: #334155;
+  }
+  #mobileNav .nav-link.active i{
+    color: var(--primary);
   }
 }
