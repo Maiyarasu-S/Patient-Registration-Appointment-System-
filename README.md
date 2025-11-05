@@ -4,6 +4,7 @@ A responsive single-page web application for managing patient registrations, app
 
 ---
 
+CLICK THIS LINK 🔗 ➤➤➤➤ [![View Landing Page](https://img.shields.io/badge/View-Projects-blue)]([https://maiyarasu-s.github.io/Digital-Feedback-Form/](https://maiyarasu-s.github.io/Patient-Registration-Appointment-System-/))
 ## 🚀 Features
 
 ### 👤 Patient Management
