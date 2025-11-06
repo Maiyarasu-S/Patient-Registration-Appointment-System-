@@ -5,37 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Patient Registration & Appointment</title>
 
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Fonts + Custom Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght=500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <!-- Mobile header for small screens -->
-  <header class="mobile-topbar navbar navbar-light bg-white fixed-top d-lg-none shadow-sm">
-    <div class="container-fluid">
-      <h5 class="m-0 fw-semibold text-primary"><i class="bi bi-hospital me-2"></i>Sterlo Hospital</h5>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
+<!-- Mobile Topbar (Hamburger) -->
+<header class="mobile-topbar navbar navbar-light bg-white fixed-top d-lg-none shadow-sm">
+  <div class="container-fluid">
+    <h5 class="m-0 fw-semibold text-primary"><i class="bi bi-hospital me-2"></i>Sterlo Hospital</h5>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
 
-    <div class="collapse" id="mobileNav">
-      <nav class="nav flex-column px-3 py-2">
-        <a href="#home" class="nav-link" data-route="home"><i class="bi bi-house-door me-2"></i> Home</a>
-        <a href="#register" class="nav-link" data-route="register"><i class="bi bi-person-plus me-2"></i> Register</a>
-        <a href="#appointment" class="nav-link" data-route="appointment"><i class="bi bi-calendar-check me-2"></i> Appointment</a>
-        <a href="#records" class="nav-link" data-route="records"><i class="bi bi-folder2-open me-2"></i> Records</a>
-      </nav>
-    </div>
-  </header>
+  <div class="collapse" id="mobileNav">
+    <nav class="nav flex-column px-3 py-2">
+      <a href="#home" class="nav-link" data-route="home"><i class="bi bi-house-door me-2"></i> Home</a>
+      <a href="#register" class="nav-link" data-route="register"><i class="bi bi-person-plus me-2"></i> Register</a>
+      <a href="#appointment" class="nav-link" data-route="appointment"><i class="bi bi-calendar-check me-2"></i> Appointment</a>
+      <a href="#records" class="nav-link" data-route="records"><i class="bi bi-folder2-open me-2"></i> Records</a>
+    </nav>
+  </div>
+</header>
 
-  <div class="app-wrapper">
-    <div class="container-fluid">
-      <!-- Left sidebar for large screens -->
+<div class="app-wrapper">
+  <div class="container-fluid">
+      <!-- Sidebar -->
       <aside class="sidebar d-none d-lg-block">
         <h4 class="text-center mb-4 text-primary fw-bold"><i class="bi bi-hospital me-2 align-text-bottom" aria-hidden="true"></i>Sterlo Hospital</h4>
+         
         <nav class="nav flex-column" aria-label="Primary">
           <a href="#home" class="nav-link active" data-route="home"><i class="bi bi-house-door me-2"></i> Home</a>
           <a href="#register" class="nav-link" data-route="register"><i class="bi bi-person-plus me-2"></i> Register</a>
@@ -44,9 +48,10 @@
         </nav>
       </aside>
 
-      <!-- Main content area -->
+      <!-- Main Content -->
       <main class="col-md-9 col-lg-10 p-4 main-content">
-        <!-- Dashboard screen -->
+        
+        <!-- HOME / DASHBOARD -->
         <section id="homePage" class="view-section" aria-labelledby="dashboardTitle">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 id="dashboardTitle" class="page-title m-0">
@@ -57,7 +62,7 @@
             </button>
           </div>
 
-          <!-- High-level numbers -->
+          <!-- DASHBOARD STATS -->
           <div class="row g-3 mb-4" id="homeStats">
             <div class="col-6 col-lg-3">
               <div class="card shadow-soft stat-card stat--primary text-center py-3">
@@ -85,15 +90,22 @@
             </div>
           </div>
 
-          <!-- Search and export actions -->
+          <!-- ACTION BAR (search + export) -->
           <div class="action-bar mb-3">
-            <input type="text" id="searchBox" class="form-control" placeholder="Search appointments…" aria-label="Search appointments" inputmode="search" />
+            <input
+              type="text"
+              id="searchBox"
+              class="form-control"
+              placeholder="Search appointments…"
+              aria-label="Search appointments"
+              inputmode="search"
+            />
             <button id="btnExportCsv" class="btn btn-outline-secondary" type="button" aria-label="Export appointments to CSV">
               Export CSV
             </button>
           </div>
 
-          <!-- Appointments table -->
+          <!-- APPOINTMENTS TABLE -->
           <div class="card shadow-soft table-card">
             <div class="card-body p-0">
               <div class="table-responsive">
@@ -110,26 +122,25 @@
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
-                  <tbody></tbody> <!-- rows injected by app.js -->
+                  <tbody><!-- filled by JS --></tbody>
                 </table>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Registration screen -->
+        <!-- REGISTRATION PAGE -->
         <section id="registerPage" class="view-section d-none" aria-labelledby="registerTitle">
           <div class="form-banner mb-4">
             <h3 id="registerTitle"><i class="bi bi-receipt me-2"></i>Patient Registration</h3>
             <p>Please enter the patient details carefully.</p>
           </div>
-
           <div class="card shadow-soft form-card">
             <div class="card-body">
               <form id="patientForm" class="form-section" novalidate>
-                <!-- Full name -->
+                <!-- Name Row -->
                 <div class="row mb-3">
-                  <label class="col-md-4 col-form-label">Full Name *</nlabel>
+                  <label class="col-md-4 col-form-label">Full Name *</label>
                   <div class="col-md-8">
                     <div class="row g-2">
                       <div class="col-md-6">
@@ -156,9 +167,7 @@
                   <div class="col-md-8">
                     <select id="gender" class="form-select" required>
                       <option value="">Select</option>
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Other</option>
+                      <option>Male</option><option>Female</option><option>Other</option>
                     </select>
                   </div>
                 </div>
@@ -189,7 +198,7 @@
                   </div>
                 </div>
 
-                <!-- Blood group -->
+                <!-- Blood Group -->
                 <div class="row mb-3">
                   <label for="bloodGroup" class="col-md-4 col-form-label">Blood Group *</label>
                   <div class="col-md-8">
@@ -203,7 +212,7 @@
                   </div>
                 </div>
 
-                <!-- Contact number -->
+                <!-- Contact -->
                 <div class="row mb-3">
                   <label for="contact" class="col-md-4 col-form-label">Contact *</label>
                   <div class="col-md-8">
@@ -211,7 +220,7 @@
                   </div>
                 </div>
 
-                <!-- Email address -->
+                <!-- Email -->
                 <div class="row mb-3">
                   <label for="email" class="col-md-4 col-form-label">Email</label>
                   <div class="col-md-8">
@@ -219,12 +228,13 @@
                   </div>
                 </div>
 
-                <!-- Form actions -->
-                <div class="form-actions">
+                <!-- Buttons -->
+               <div class="form-actions">
                   <button type="submit" class="btn btn-primary btn-lg action-primary">
                     <i class="bi bi-check2-circle me-2" aria-hidden="true"></i>
                     Register
                   </button>
+
                   <button type="reset" class="btn btn-ghost btn-lg">
                     <i class="bi bi-arrow-counterclockwise me-2" aria-hidden="true"></i>
                     Reset
@@ -235,13 +245,12 @@
           </div>
         </section>
 
-        <!-- Appointment booking screen -->
+        <!-- APPOINTMENT PAGE -->
         <section id="appointmentPage" class="view-section d-none" aria-labelledby="appointmentTitle">
           <div class="form-banner mb-4">
             <h3 id="appointmentTitle"><i class="bi bi-calendar-check me-2"></i>Book Appointment</h3>
             <p>Choose department, doctor, and time slot.</p>
           </div>
-
           <div class="card shadow-soft form-card">
             <div class="card-body">
               <form id="apptForm" class="form-section" novalidate>
@@ -265,22 +274,24 @@
                   <label for="timeSelect" class="col-md-4 col-form-label">Time *</label>
                   <div class="col-md-8"><select id="timeSelect" class="form-select" required></select></div>
                 </div>
-                <div class="form-actions">
-                  <button type="submit" class="btn btn-primary btn-lg action-primary">
-                    <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>
-                    Book Appointment
-                  </button>
-                  <button type="reset" class="btn btn-ghost btn-lg">
-                    <i class="bi bi-arrow-counterclockwise me-2" aria-hidden="true"></i>
-                    Reset
-                  </button>
-                </div>
+                  <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg action-primary">
+                      <i class="bi bi-calendar2-check me-2" aria-hidden="true"></i>
+                      Book Appointment
+                    </button>
+
+                    <button type="reset" class="btn btn-ghost btn-lg">
+                      <i class="bi bi-arrow-counterclockwise me-2" aria-hidden="true"></i>
+                      Reset
+                    </button>
+                  </div>
+
               </form>
             </div>
           </div>
         </section>
 
-        <!-- Patient records screen -->
+        <!-- RECORDS PAGE -->
         <section id="recordsPage" class="view-section d-none" aria-labelledby="recordsTitle">
           <div class="card shadow-soft mb-3">
             <div class="card-body d-flex justify-content-between align-items-center">
@@ -289,12 +300,17 @@
             </div>
           </div>
 
-          <!-- Search patients -->
           <div class="action-bar mb-3">
-            <input type="text" id="patientSearch" class="form-control" placeholder="Search by name, contact, or email…" aria-label="Search patients" inputmode="search" />
+            <input
+              type="text"
+              id="patientSearch"
+              class="form-control"
+              placeholder="Search by name, contact, or email…"
+              aria-label="Search patients"
+              inputmode="search"
+            />
           </div>
 
-          <!-- Patients table -->
           <div class="card shadow-soft table-card">
             <div class="card-body p-0">
               <div class="table-responsive">
@@ -310,208 +326,218 @@
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
-                  <tbody></tbody> <!-- rows injected by app.js -->
+                  <tbody><!-- filled by JS --></tbody>
                 </table>
               </div>
             </div>
           </div>
         </section>
+
       </main>
-    </div>
   </div>
+</div>
 
-  <!-- Edit appointment modal -->
-  <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit Appointment</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="editForm" class="form-section" novalidate>
-            <div class="row mb-3 align-items-center">
-              <label for="editDate" class="col-md-4 col-form-label">Date</label>
-              <div class="col-md-8"><input type="date" id="editDate" class="form-control" required></div>
-            </div>
-            <div class="row mb-3 align-items-center">
-              <label for="editTime" class="col-md-4 col-form-label">Time</label>
-              <div class="col-md-8"><select id="editTime" class="form-select" required></select></div>
-            </div>
-            <input type="hidden" id="editId">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="saveEditBtn">Save changes</button>
-        </div>
+<!-- EDIT APPOINTMENT MODAL -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Appointment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editForm" class="form-section" novalidate>
+          <div class="row mb-3 align-items-center">
+            <label for="editDate" class="col-md-4 col-form-label">Date</label>
+            <div class="col-md-8"><input type="date" id="editDate" class="form-control" required></div>
+          </div>
+          <div class="row mb-3 align-items-center">
+            <label for="editTime" class="col-md-4 col-form-label">Time</label>
+            <div class="col-md-8"><select id="editTime" class="form-select" required></select></div>
+          </div>
+          <input type="hidden" id="editId">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="saveEditBtn">Save changes</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Delete appointment modal -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Delete Appointment</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete this appointment?</p>
-          <input type="hidden" id="deleteId">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
-        </div>
+<!-- DELETE APPOINTMENT MODAL -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Appointment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this appointment?</p>
+        <input type="hidden" id="deleteId">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Edit patient modal -->
-  <div class="modal fade" id="patientEditModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit Patient</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="patientEditForm" class="form-section" novalidate>
-            <input type="hidden" id="editPid">
+<!-- EDIT PATIENT MODAL -->
+<div class="modal fade" id="patientEditModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Patient</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
-            <!-- Full name -->
-            <div class="row mb-3">
-              <label class="col-md-4 col-form-label">Full Name *</label>
-              <div class="col-md-8">
-                <div class="row g-2">
-                  <div class="col-md-6">
-                    <input type="text" id="editFirstName" class="form-control" required placeholder="First name" autocomplete="given-name">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" id="editLastName" class="form-control" required placeholder="Last name" autocomplete="family-name">
-                  </div>
+      <div class="modal-body">
+        <form id="patientEditForm" class="form-section" novalidate>
+          <input type="hidden" id="editPid">
+
+          <!-- Full Name -->
+          <div class="row mb-3">
+            <label class="col-md-4 col-form-label">Full Name *</label>
+            <div class="col-md-8">
+              <div class="row g-2">
+                <div class="col-md-6">
+                  <input type="text" id="editFirstName" class="form-control" required placeholder="First name" autocomplete="given-name">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" id="editLastName" class="form-control" required placeholder="Last name" autocomplete="family-name">
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Age -->
-            <div class="row mb-3">
-              <label for="editAge" class="col-md-4 col-form-label">Age *</label>
-              <div class="col-md-8">
-                <input type="number" id="editAge" class="form-control" required min="1" inputmode="numeric">
-              </div>
+          <!-- Age -->
+          <div class="row mb-3">
+            <label for="editAge" class="col-md-4 col-form-label">Age *</label>
+            <div class="col-md-8">
+              <input type="number" id="editAge" class="form-control" required min="1" inputmode="numeric">
             </div>
+          </div>
 
-            <!-- Gender -->
-            <div class="row mb-3">
-              <label for="editGender" class="col-md-4 col-form-label">Gender *</label>
-              <div class="col-md-8">
-                <select id="editGender" class="form-select" required>
-                  <option value="">Select</option>
-                  <option>Male</option><option>Female</option><option>Other</option>
-                </select>
-              </div>
+          <!-- Gender -->
+          <div class="row mb-3">
+            <label for="editGender" class="col-md-4 col-form-label">Gender *</label>
+            <div class="col-md-8">
+              <select id="editGender" class="form-select" required>
+                <option value="">Select</option>
+                <option>Male</option><option>Female</option><option>Other</option>
+              </select>
             </div>
+          </div>
 
-            <!-- Address -->
-            <div class="row mb-3">
-              <label for="editAddress" class="col-md-4 col-form-label">Address *</label>
-              <div class="col-md-8">
-                <textarea id="editAddress" class="form-control" rows="2" required placeholder="House No / Street" autocomplete="street-address"></textarea>
-              </div>
+          <!-- Address -->
+          <div class="row mb-3">
+            <label for="editAddress" class="col-md-4 col-form-label">Address *</label>
+            <div class="col-md-8">
+              <textarea id="editAddress" class="form-control" rows="2" required placeholder="House No / Street" autocomplete="street-address"></textarea>
             </div>
+          </div>
 
-            <!-- City / State / Pincode -->
-            <div class="row mb-3">
-              <label class="col-md-4 col-form-label">City / State / Pincode *</label>
-              <div class="col-md-8">
-                <div class="row g-2">
-                  <div class="col-md-4 col-sm-12">
-                    <input type="text" id="editCity" class="form-control" required placeholder="City" autocomplete="address-level2">
-                  </div>
-                  <div class="col-md-4 col-sm-12">
-                    <input type="text" id="editState" class="form-control" required placeholder="State" autocomplete="address-level1">
-                  </div>
-                  <div class="col-md-4 col-sm-12">
-                    <input type="text" id="editPincode" class="form-control" pattern="\d{6}" maxlength="6" required placeholder="Pincode" inputmode="numeric" autocomplete="postal-code">
-                  </div>
+          <!-- City / State / Pincode -->
+          <div class="row mb-3">
+            <label class="col-md-4 col-form-label">City / State / Pincode *</label>
+            <div class="col-md-8">
+              <div class="row g-2">
+                <div class="col-md-4 col-sm-12">
+                  <input type="text" id="editCity" class="form-control" required placeholder="City" autocomplete="address-level2">
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <input type="text" id="editState" class="form-control" required placeholder="State" autocomplete="address-level1">
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <input type="text" id="editPincode" class="form-control" pattern="\d{6}" maxlength="6" required placeholder="Pincode" inputmode="numeric" autocomplete="postal-code">
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Blood group -->
-            <div class="row mb-3">
-              <label for="editBloodGroup" class="col-md-4 col-form-label">Blood Group *</label>
-              <div class="col-md-8">
-                <select id="editBloodGroup" class="form-select" required>
-                  <option value="">Select</option>
-                  <option>A+</option><option>A-</option>
-                  <option>B+</option><option>B-</option>
-                  <option>O+</option><option>O-</option>
-                  <option>AB+</option><option>AB-</option>
-                </select>
-              </div>
+          <!-- Blood Group -->
+          <div class="row mb-3">
+            <label for="editBloodGroup" class="col-md-4 col-form-label">Blood Group *</label>
+            <div class="col-md-8">
+              <select id="editBloodGroup" class="form-select" required>
+                <option value="">Select</option>
+                <option>A+</option><option>A-</option>
+                <option>B+</option><option>B-</option>
+                <option>O+</option><option>O-</option>
+                <option>AB+</option><option>AB-</option>
+              </select>
             </div>
+          </div>
 
-            <!-- Contact -->
-            <div class="row mb-3">
-              <label for="editContact" class="col-md-4 col-form-label">Contact *</label>
-              <div class="col-md-8">
-                <input type="text" id="editContact" class="form-control" required placeholder="9876543210" inputmode="tel" autocomplete="tel">
-              </div>
+          <!-- Contact -->
+          <div class="row mb-3">
+            <label for="editContact" class="col-md-4 col-form-label">Contact *</label>
+            <div class="col-md-8">
+              <input type="text" id="editContact" class="form-control" required placeholder="9876543210" inputmode="tel" autocomplete="tel">
             </div>
+          </div>
 
-            <!-- Email -->
-            <div class="row mb-3">
-              <label for="editEmail" class="col-md-4 col-form-label">Email</label>
-              <div class="col-md-8">
-                <input type="email" id="editEmail" class="form-control" placeholder="example@gmail.com" autocomplete="email">
-              </div>
+          <!-- Email -->
+          <div class="row mb-3">
+            <label for="editEmail" class="col-md-4 col-form-label">Email</label>
+            <div class="col-md-8">
+              <input type="email" id="editEmail" class="form-control" placeholder="example@gmail.com" autocomplete="email">
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="savePatientEditBtn">Update</button>
-        </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="savePatientEditBtn">Update</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Patient bookings modal -->
-  <div class="modal fade" id="patientBookingsModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Patient Bookings</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div id="bookingsList"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+
+<!-- PATIENT BOOKINGS MODAL -->
+<div class="modal fade" id="patientBookingsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Patient Bookings</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="bookingsList"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Toast (small popup message) -->
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:1080">
-    <div id="toast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body" id="toastBody">Message</div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
+<!-- Toast container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:1080">
+  <div id="toast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastBody">Message</div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   </div>
+</div>
 
-  <!-- JS: Bootstrap + app scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/validate.js"></script>
-  <script src="js/app.js"></script>
+<!-- Bootstrap JS + App -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/validate.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
+
+
+
+
+
