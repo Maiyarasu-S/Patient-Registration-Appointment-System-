@@ -1,0 +1,142 @@
+body {
+  background-color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #0069d9 0%, #004085 100%);
+  color: #fff;
+  padding: 30px 20px;
+  min-height: 100vh;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar h2 {
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 40px;
+  color: #ffffff;
+}
+
+
+.sidebar .btn {
+  width: 100%;
+  text-align: left;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.sidebar .btn i {
+  font-size: 1rem;
+}
+
+
+.sidebar .btn:hover {
+  transform: translateX(5px);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.3);
+}
+
+
+.sidebar .btn-light {
+  background-color: #ffffff;
+  color: #004085;
+}
+.sidebar .btn-light:hover {
+  background-color: #f1f1f1;
+}
+
+.sidebar .btn-success {
+  background-color: #28a745;
+  color: #fff;
+}
+.sidebar .btn-success:hover {
+  background-color: #218838;
+}
+
+.sidebar .btn-info {
+  background-color: #17a2b8;
+  color: #fff;
+}
+.sidebar .btn-info:hover {
+  background-color: #138496;
+}
+
+.sidebar .btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+.sidebar .btn-warning:hover {
+  background-color: #e0a800;
+}
+
+
+.content {
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  background-color: #f8f9fa;
+}
+
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(231, 186, 186, 0.03);
+}
+
+.summary-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 20px;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+
+.modal-body label {
+  font-weight: 500;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+/* Validation styles */
+.input-error { 
+  border-color: #dc3545 !important; }
+.error-text { 
+  color: #dc3545; 
+  font-size: 0.85rem;
+  margin-top: 0.15rem; 
+  display:block; }
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
